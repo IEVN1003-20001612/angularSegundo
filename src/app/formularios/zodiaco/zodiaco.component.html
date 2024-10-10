@@ -1,0 +1,95 @@
+<div class="container">
+    <h2>Calcula tu Signo Zodiacal</h2>
+    <form [formGroup]="personalForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" formControlName="nombre" class="form-control" />
+        <div *ngIf="personalForm.get('nombre')?.invalid && personalForm.get('nombre')?.touched" class="text-danger">
+          El nombre es requerido.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="apaterno">Apellido Paterno:</label>
+        <input type="text" id="apaterno" formControlName="apaterno" class="form-control" />
+        <div *ngIf="personalForm.get('apaterno')?.invalid && personalForm.get('apaterno')?.touched" class="text-danger">
+          El apellido paterno es requerido.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="amaterno">Apellido Materno:</label>
+        <input type="text" id="amaterno" formControlName="amaterno" class="form-control" />
+        <div *ngIf="personalForm.get('amaterno')?.invalid && personalForm.get('amaterno')?.touched" class="text-danger">
+          El apellido materno es requerido.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="dia">Día de Nacimiento:</label>
+        <input type="number" id="dia" formControlName="dia" class="form-control" />
+        <div *ngIf="personalForm.get('dia')?.invalid && personalForm.get('dia')?.touched" class="text-danger">
+          Debe ser un día válido (1-31).
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="mes">Mes de Nacimiento:</label>
+        <input type="number" id="mes" formControlName="mes" class="form-control" />
+        <div *ngIf="personalForm.get('mes')?.invalid && personalForm.get('mes')?.touched" class="text-danger">
+          Debe ser un mes válido (1-12).
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="anio">Año de Nacimiento:</label>
+        <input type="number" id="anio" formControlName="anio" class="form-control" />
+        <div *ngIf="personalForm.get('anio')?.invalid && personalForm.get('anio')?.touched" class="text-danger">
+          Debe ser un año válido (>= 1900).
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Sexo:</label>
+        <div>
+          <label><input type="radio" formControlName="sexo" value="masculino" /> Masculino</label>
+          <label><input type="radio" formControlName="sexo" value="femenino" /> Femenino</label>
+          <div *ngIf="personalForm.get('sexo')?.invalid && personalForm.get('sexo')?.touched" class="text-danger">
+            El sexo es requerido.
+          </div>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="personalForm.invalid" class="btn btn-primary">Imprimir</button>
+    </form>
+  
+    <div *ngIf="showResult" class="result mt-4">
+      <h3>{{ personalData.nombre }} {{ personalData.apaterno }} {{ personalData.amaterno }}</h3>
+      <p>Edad: {{ personalData.edad }} años</p>
+      <p>Tu signo zodiacal es: <strong>{{ personalData.signo }}</strong></p>
+      <img *ngIf="zodiacImage" [src]="zodiacImage" alt="{{ personalData.signo }}" class="zodiac-image" />
+    </div>
+  </div>
+  
+  <style>
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .result {
+      border: 1px solid #007bff;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #e7f3ff;
+    }
+    .zodiac-image {
+      width: 100px;
+      height: auto;
+      margin-top: 10px;
+    }
+  </style>
+  
