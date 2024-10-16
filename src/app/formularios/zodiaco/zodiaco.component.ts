@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './zodiaco.component.html',
 })
-export class ZodiacoComponent implements OnInit {
+export default class ZodiacoComponent implements OnInit {
   zodiacImage?: string;
   showResult = false;
   personalData: any;
