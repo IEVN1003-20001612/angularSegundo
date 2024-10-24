@@ -1,0 +1,75 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4">Registro de Chalanes</h1>
+  
+  <form (ngSubmit)="registrarEmpleado()" #empleadoForm="ngForm">
+    <div class="mb-4">
+      <label class="block">Matrícula:</label>
+      <input [(ngModel)]="nuevoEmpleado.matricula" name="matricula" required class="border p-2 w-full"/>
+    </div>
+    
+    <div class="mb-4">
+      <label class="block">Nombre:</label>
+      <input [(ngModel)]="nuevoEmpleado.nombre" name="nombre" required class="border p-2 w-full"/>
+    </div>
+    
+    <div class="mb-4">
+      <label class="block">Correo:</label>
+      <input [(ngModel)]="nuevoEmpleado.correo" name="correo" required class="border p-2 w-full"/>
+    </div>
+
+    <div class="mb-4">
+      <label class="block">Edad:</label>
+      <input type="number" [(ngModel)]="nuevoEmpleado.edad" name="edad" required class="border p-2 w-full"/>
+    </div>
+
+    <div class="mb-4">
+      <label class="block">Horas Trabajadas:</label>
+      <input type="number" [(ngModel)]="nuevoEmpleado.horasTrabajadas" name="horasTrabajadas" required class="border p-2 w-full"/>
+    </div>
+
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Registrar</button>
+    <button type="button" (click)="mostrarRegistros()" class="ml-2 bg-green-500 text-white p-2 rounded">Mostrar Registros</button>
+  </form>
+
+  <h2 class="text-xl font-bold mt-8 mb-4">Registros de Chalanes</h2>
+  
+  <table *ngIf="empleados.length > 0" class="min-w-full border">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="border px-4 py-2">Matrícula</th>
+        <th class="border px-4 py-2">Nombre</th>
+        <th class="border px-4 py-2">Correo</th>
+        <th class="border px-4 py-2">Edad</th>
+        <th class="border px-4 py-2">Horas Trabajadas</th>
+        <th class="border px-4 py-2">Horas a Pagar</th>
+        <th class="border px-4 py-2">Horas Extras</th>
+        <th class="border px-4 py-2">Subtotal</th>
+        <th class="border px-4 py-2">Acciones</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empleado of empleados">
+        <td class="border px-4 py-2">{{ empleado.matricula }}</td>
+        <td class="border px-4 py-2">{{ empleado.nombre }}</td>
+        <td class="border px-4 py-2">{{ empleado.correo }}</td>
+        <td class="border px-4 py-2">{{ empleado.edad }}</td>
+        <td class="border px-4 py-2">{{ empleado.horasTrabajadas }}</td>
+        <td class="border px-4 py-2">{{ empleado.horasXPagar | currency }}</td>
+        <td class="border px-4 py-2">{{ empleado.horasExtras | currency }}</td>
+        <td class="border px-4 py-2">{{ empleado.subtotal | currency }}</td>
+        <td class="border px-4 py-2">
+          <button (click)="modificarEmpleado(empleado.matricula)" class="bg-yellow-500 text-white p-1 rounded">Editar</button>
+          <button (click)="eliminarEmpleado(empleado.matricula)" class="bg-red-500 text-white p-1 rounded">Eliminar</button>
+        </td> 
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="7" class="border px-4 py-2 font-bold">Total a Pagar:</td>
+        <td class="border px-4 py-2 font-bold">{{ totalAPagar | currency }}</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <p *ngIf="empleados.length === 0" class="mt-4 text-gray-600">No hay nada mi rey. Presiona "Mostrar Registros" para cargar los empleados guardados.</p>
+</div>

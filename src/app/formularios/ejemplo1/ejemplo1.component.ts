@@ -12,9 +12,9 @@ interface Usuario{
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './ejemplo1.component.html',
-  styleUrl: './ejemplo1.component.css'
+ 
 })
-export default class Ejemplo1Component implements OnInit{
+export default class ejemplo1Component implements OnInit{
 
   formGroup!:FormGroup;
   nombre:string='Sebas'
